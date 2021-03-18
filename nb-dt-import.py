@@ -9,7 +9,23 @@ import argparse
 import os
 import settings
 
-REPO_URL = settings.REPO_URL
+
+try:
+  REPO_URL = settings.REPO_URL
+except OSError:
+  REPO_URL = input("Please provide source repo and hit 'Enter': ")
+  os.environ[REPO_URL]
+try:
+  nbUrl = settings.NETBOX_URL
+except OSError:
+  nbUrl = input("Please provide NETBOX_URL  and hit 'Enter': ")
+  os.environ[nbUrl]
+try:
+  nbToken = settings.NETBOX_TOKEN
+except OSError:
+  nbToken = input("Please provide NETBOX_TOKEN and hit 'Enter': ": ")
+  os.environ[nbToken]
+
 parser = argparse.ArgumentParser(description='Import Netbox Device Types')
 parser.add_argument('--vendor', nargs='+',
                     help="List of vendors to import eg. apc cisco")
@@ -19,8 +35,6 @@ args = parser.parse_args()
 
 cwd = os.getcwd()
 counter = Counter(added=0, updated=0, manufacturer=0)
-nbUrl = settings.NETBOX_URL
-nbToken = settings.NETBOX_TOKEN
 startTime = datetime.now()
 
 
