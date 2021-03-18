@@ -23,7 +23,7 @@ except OSError:
 try:
   nbToken = settings.NETBOX_TOKEN
 except OSError:
-  nbToken = input("Please provide NETBOX_TOKEN and hit 'Enter': ": ")
+  nbToken = input("Please provide NETBOX_TOKEN and hit 'Enter': ")
   os.environ[nbToken]
 
 parser = argparse.ArgumentParser(description='Import Netbox Device Types')
